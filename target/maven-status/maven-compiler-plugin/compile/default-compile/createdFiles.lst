@@ -1,6 +1,6 @@
 com/amazon/ask/helloworld/boot/Application.class
-com/amazon/ask/helloworld/handlers/SessionEndedRequestHandler.class
 com/amazon/ask/helloworld/handlers/CancelandStopIntentHandler.class
+com/amazon/ask/helloworld/handlers/SessionEndedRequestHandler.class
 com/amazon/ask/helloworld/handlers/LaunchRequestHandler.class
 com/amazon/ask/helloworld/handlers/HelloWorldIntentHandler.class
 com/amazon/ask/helloworld/HelloWorldStreamHandler.class
