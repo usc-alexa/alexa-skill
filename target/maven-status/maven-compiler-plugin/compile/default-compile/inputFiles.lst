@@ -1,13 +1,3 @@
-/Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/handlers/SessionEndedRequestHandler.java
-/Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/handlers/HelpIntentHandler.java
-/Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/handlers/DoNotCallEmergencyIntentHandler.java
-/Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/handlers/LaunchRequestHandler.java
-/Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/handlers/CancelandStopIntentHandler.java
-/Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/boot/Application.java
-/Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/handlers/CallDoctorIntentHandler.java
-/Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/handlers/GetTaskIntentIntentHandler.java
-/Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/handlers/services/Alert.java
 /Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/handlers/services/AlertIntentService.java
-/Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/handlers/CallDoctorConfirmationIntentHandler.java
 /Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/CarePlacesStreamHandler.java
-/Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/handlers/AlertIntentHandler.java
+/Volumes/EXTERNAL/mobileapps/alexacareplaces/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java
