@@ -64,7 +64,7 @@ public class CareplaceSpeechlet implements SpeechletV2 {
             String speechText = service.login();
             return getResponse(speechText);
         } if ("CallDoctorConfirmation".equals(intentName)) {
-            String slotValue = intent.getSlot("Doctor").getValue();
+            String slotValue = intent.getSlot("doctorName").getValue();
             String speechText = "Calling doctor "+ slotValue;
             return getResponse(speechText);
         } if ("DoNotCallEmergency".equals(intentName)) {
@@ -73,7 +73,11 @@ public class CareplaceSpeechlet implements SpeechletV2 {
         } if ("GetTaskIntent".equals(intentName)) {
             String speechText = "You do not have any task at this moment";
             return getResponse(speechText);
-        }  else if ("AMAZON.HelpIntent".equals(intentName)) {
+        } if ("GoodBye".equals(intentName)) {
+            String speechText = "Take Care. Good bye";
+            return getResponse(speechText);
+        }
+        else if ("AMAZON.HelpIntent".equals(intentName)) {
             return getHelpResponse();
         } else {
             return getAskResponse("HelloWorld", "This is unsupported.  Please try something else.");
