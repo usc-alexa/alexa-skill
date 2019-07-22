@@ -55,13 +55,31 @@ public class CareplaceSpeechlet implements SpeechletV2 {
         Intent intent = request.getIntent();
 
         String intentName = (intent != null) ? intent.getName() : null;
+        AlertIntentService service = new AlertIntentService();
+        if ("MakeAppointment".equals(intentName)) {
+            String dateRangeStart = intent.getSlot("startDate").getValue();
+            String dateRangeEnd = intent.getSlot("endDate").getValue();
 
+            System.out.println("date passed start="+dateRangeStart);
+            System.out.println("date passed end="+dateRangeEnd);
+
+            String speechText = service.getAppointmentSlots(dateRangeStart,dateRangeEnd,requestEnvelope.getSession());
+
+            return getAskResponse("Confirm Selection",speechText);
+        }
+        if ("ConfirmSlot".equals(intentName)) {
+           // String speechText = service.getAppointmentSlots(dateRangeStart,dateRangeEnd,requestEnvelope.getSession());
+            String slotNumber = intent.getSlot("startDate").getValue();
+            System.out.println("slot number="+slotNumber);
+            System.out.println("stored slots="+requestEnvelope.getSession().getAttribute("SLOTMAP").toString());
+            return getAskResponse("Confirm Selection","test");
+        }
         if ("CallDoctor".equals(intentName)) {
             String speechText = "if this is emergency, do you want me to call 911?";
             return getResponse(speechText);
         } if ("AlertInvestigationIntent".equals(intentName)) {
-            AlertIntentService service = new AlertIntentService();
-            String speechText = service.login();
+
+            String speechText = service.getAlerts();
             return getResponse(speechText);
         } if ("CallDoctorConfirmation".equals(intentName)) {
             String slotValue = intent.getSlot("doctorName").getValue();

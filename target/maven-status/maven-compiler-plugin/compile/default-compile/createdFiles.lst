@@ -1,0 +1,3 @@
+com/amazon/ask/careplaces/CareplaceSpeechlet.class
+com/amazon/ask/careplaces/CarePlacesStreamHandler.class
+com/amazon/ask/careplaces/handlers/services/AlertIntentService.class

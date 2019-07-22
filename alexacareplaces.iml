@@ -51,6 +51,6 @@
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-s3:1.9.40" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-kms:1.9.40" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-core:1.9.40" level="project" />
-    <orderEntry type="library" name="Maven: joda-time:joda-time:2.10.1" level="project" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:2.10.3" level="project" />
   </component>
 </module>

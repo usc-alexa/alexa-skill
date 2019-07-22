@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60b58404-1ffc-44f8-9260-966517202c73" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_10_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alexacareplaces.iml" beforeDir="false" afterPath="$PROJECT_DIR$/alexacareplaces.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/services/AlertIntentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/services/AlertIntentService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="510">
-              <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
             </state>
           </provider>
         </entry>
@@ -30,13 +34,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/CarePlacesStreamHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
+            <state relative-caret-position="314">
               <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#1690#1691#0" expanded="true" />
-                <element signature="e#1763#1764#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,8 +47,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="76" column="52" selection-start-line="76" selection-start-column="52" selection-end-line="76" selection-end-column="52" />
+            <state relative-caret-position="358">
+              <caret line="73" column="47" selection-start-line="73" selection-start-column="47" selection-end-line="73" selection-end-column="47" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -63,11 +65,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/services/AlertIntentService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+            <state relative-caret-position="313">
+              <caret line="196" column="45" selection-start-line="196" selection-start-column="38" selection-end-line="196" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2305#2336#0" expanded="true" />
+                <element signature="e#2560#2575#0" expanded="true" />
+                <element signature="e#4378#4393#0" expanded="true" />
+                <element signature="e#4602#4618#0" expanded="true" />
+                <element signature="e#5634#5649#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,8 +102,8 @@
         <option value="$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/AlertIntentHandler.java" />
         <option value="$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/CallDoctorConfirmationIntentHandler.java" />
         <option value="$PROJECT_DIR$/src/com/amazon/ask/careplaces/CarePlacesStreamHandler.java" />
-        <option value="$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/services/AlertIntentService.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/services/AlertIntentService.java" />
         <option value="$PROJECT_DIR$/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java" />
       </list>
     </option>
@@ -111,10 +116,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="294" />
-    <option name="y" value="335" />
+    <option name="x" value="200" />
+    <option name="y" value="23" />
     <option name="width" value="1153" />
-    <option name="height" value="709" />
+    <option name="height" value="808" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -124,6 +129,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -154,11 +160,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544592560978" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563759864229" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
@@ -178,6 +183,26 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="AlertIntentService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.amazon.ask.careplaces.handlers.services.AlertIntentService" />
+      <module name="alexacareplaces" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.amazon.ask.careplaces.handlers.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.AlertIntentService" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -192,10 +217,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="294" y="335" width="1153" height="709" extended-state="0" />
+    <frame x="200" y="23" width="1153" height="808" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31053105" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3159316" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -204,7 +229,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49954996" weight="0.32896653" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32960895" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -225,123 +250,58 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/AlertInvestigationIntentHandler.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/LaunchRequestHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/LaunchRequestHandler.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/GetTaskIntentIntentHandler.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/AlertIntentHandler.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/CancelandStopIntentHandler.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/CallDoctorIntentHandler.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/DoNotCallEmergencyIntentHandler.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/CallDoctorConfirmationIntentHandler.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/HelpIntentHandler.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/boot/Application.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/services/Alert.java" />
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
+        <state relative-caret-position="510">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alexacareplaces.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/GetTaskIntentIntentHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="27" column="54" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="54" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/AlertIntentHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/CarePlacesStreamHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="34" column="8" selection-start-line="34" selection-start-column="8" selection-end-line="35" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/CancelandStopIntentHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/CallDoctorIntentHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="35" column="80" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/DoNotCallEmergencyIntentHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="35" lean-forward="true" selection-start-line="34" selection-start-column="8" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/CallDoctorConfirmationIntentHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
+        <state relative-caret-position="314">
+          <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
           <folding>
+            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/HelpIntentHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/boot/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/services/Alert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding>
-            <element signature="e#252#283#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/services/AlertIntentService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        <state relative-caret-position="313">
+          <caret line="196" column="45" selection-start-line="196" selection-start-column="38" selection-end-line="196" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2305#2336#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/CarePlacesStreamHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1690#1691#0" expanded="true" />
-            <element signature="e#1763#1764#0" expanded="true" />
+            <element signature="e#2560#2575#0" expanded="true" />
+            <element signature="e#4378#4393#0" expanded="true" />
+            <element signature="e#4602#4618#0" expanded="true" />
+            <element signature="e#5634#5649#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="76" column="52" selection-start-line="76" selection-start-column="52" selection-end-line="76" selection-end-column="52" />
+        <state relative-caret-position="358">
+          <caret line="73" column="47" selection-start-line="73" selection-start-column="47" selection-end-line="73" selection-end-column="47" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
