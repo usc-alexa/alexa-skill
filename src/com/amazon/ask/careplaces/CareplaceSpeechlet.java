@@ -26,6 +26,8 @@ import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
 import com.amazon.speech.ui.OutputSpeech;
 
+import java.util.Map;
+
 /**
  * This sample shows how to create a simple speechlet for handling speechlet requests.
  */
@@ -58,28 +60,36 @@ public class CareplaceSpeechlet implements SpeechletV2 {
         AlertIntentService service = new AlertIntentService();
         if ("MakeAppointment".equals(intentName)) {
             String dateRangeStart = intent.getSlot("startDate").getValue();
-            String dateRangeEnd = intent.getSlot("endDate").getValue();
+
 
             System.out.println("date passed start="+dateRangeStart);
-            System.out.println("date passed end="+dateRangeEnd);
 
-            String speechText = service.getAppointmentSlots(dateRangeStart,dateRangeEnd,requestEnvelope.getSession());
+
+            String speechText = service.getAppointmentSlots(dateRangeStart,requestEnvelope.getSession());
 
             return getAskResponse("Confirm Selection",speechText);
         }
         if ("ConfirmSlot".equals(intentName)) {
            // String speechText = service.getAppointmentSlots(dateRangeStart,dateRangeEnd,requestEnvelope.getSession());
-            String slotNumber = intent.getSlot("startDate").getValue();
+            String slotNumber = intent.getSlot("slotValue").getValue();
+
             System.out.println("slot number="+slotNumber);
-            System.out.println("stored slots="+requestEnvelope.getSession().getAttribute("SLOTMAP").toString());
-            return getAskResponse("Confirm Selection","test");
+            System.out.println("stored slots="+requestEnvelope.getSession().getAttribute("SLOTMAP"));
+            Map<String,String> slotvalue = (Map)requestEnvelope.getSession().getAttribute("SLOTMAP");
+            String slotText = slotvalue.get(slotNumber);
+            if(slotText==null){
+                return getAskResponse("Slot error","Please say a valid slot number. You can say slot one or slot two etcetera.");
+            }
+
+            String responseText = service.createAppointment(slotNumber,slotText,requestEnvelope.getSession());
+            return getResponse(responseText);
         }
         if ("CallDoctor".equals(intentName)) {
             String speechText = "if this is emergency, do you want me to call 911?";
             return getResponse(speechText);
         } if ("AlertInvestigationIntent".equals(intentName)) {
 
-            String speechText = service.getAlerts();
+            String speechText = service.getAlerts(requestEnvelope.getSession());
             return getResponse(speechText);
         } if ("CallDoctorConfirmation".equals(intentName)) {
             String slotValue = intent.getSlot("doctorName").getValue();
