@@ -1,0 +1,88 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "usc",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AssertInitQuestion",
+                    "slots": [],
+                    "samples": [
+                        "yes",
+                        "make appointment",
+                        "make appointment with Dr. Tami Howdeshell",
+                        "yes please"
+                    ]
+                },
+                {
+                    "name": "ConfirmOneSlotBooking",
+                    "slots": [],
+                    "samples": [
+                        "book this slot"
+                    ]
+                },
+                {
+                    "name": "RespondInitQuestion",
+                    "slots": [
+                        {
+                            "name": "startDate",
+                            "type": "AMAZON.DATE"
+                        }
+                    ],
+                    "samples": [
+                        "book it on {startDate}"
+                    ]
+                },
+                {
+                    "name": "MakeAppointment",
+                    "slots": [
+                        {
+                            "name": "startDate",
+                            "type": "AMAZON.DATE"
+                        }
+                    ],
+                    "samples": [
+                        "to make an appointment on {startDate}",
+                        "make appointment on {startDate}",
+                        "make appointment with my doctor on {startDate}",
+                        "I would like to make an appointment on {startDate}"
+                    ]
+                },
+                {
+                    "name": "ConfirmSlot",
+                    "slots": [
+                        {
+                            "name": "slotValue",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "book slot {slotValue}",
+                        "use slot {slotValue}",
+                        "slot {slotValue}"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}

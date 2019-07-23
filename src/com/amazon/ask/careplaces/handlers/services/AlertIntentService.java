@@ -22,8 +22,8 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class AlertIntentService {
 	
@@ -43,7 +43,7 @@ public class AlertIntentService {
 		}
 
 		String url = "https://dev1.careplaces.us/ubercare-system/api/login";
-		String requestJson = "{\"username\":\"sathima@msn.com\",\"password\":\"C.p@2017#\"}";
+		String requestJson = "{\"username\":\"tim.lambert.cp@gmail.com\",\"password\":\"C.p@2017#\"}";
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -184,7 +184,7 @@ public class AlertIntentService {
 			e.printStackTrace();
 		}
 
-		return "Your appoint is booked successfully for "+slotText;
+		return "Your appoint with Dr. Tami Howdeshell is booked successfully for "+slotText;
 	}
 
 
@@ -211,9 +211,10 @@ public class AlertIntentService {
 			slotRequestMap.add("access_token", getAccessToken(session));
 			slotRequestMap.add("physicianUserID","45");
 			slotRequestMap.add("orgID","2");
+			System.out.println("date range passed ====="+dateRangeStart);
 
-			slotRequestMap.add("startDate", StringUtils.isEmpty(dateRangeStart)?dateRangeStart:"2019-07-01");
-			slotRequestMap.add("endDate",StringUtils.isEmpty(dateRangeStart)?dateRangeStart:"2019-07-01");
+			slotRequestMap.add("startDate", dateRangeStart);
+			slotRequestMap.add("endDate",dateRangeStart);
 
 
 
@@ -230,19 +231,19 @@ public class AlertIntentService {
 			System.out.println("AlertIntentService.login()11"+slotObject.toString());
 
 			if(!slotObject.has("slots")){
-				return "No slots available for "+dateRangeStart;
+				return "No slots available for "+dateRangeStart+". Would you like to try another date?";
 			}
 
 			JSONArray slotsArray = slotObject.getJSONArray("slots");
 
 			if(slotsArray.length() == 0){
-				return "No slots available for "+dateRangeStart;
+				return "No slots available for "+dateRangeStart+". Would you like to try another date?";
 			}
 
 
 
 
-			slotMessage.append("Following slots are available for your requested date.");
+			slotMessage.append("Following slots are available for Dr. Tami Howdeshell on your requested date.");
 
 
 			Map<String,String> slotmap = new HashMap<String,String>();
@@ -251,9 +252,10 @@ public class AlertIntentService {
 			{
 				StringBuffer slotFrag = new StringBuffer();
 
-				String start = slotsArray.getJSONObject(i).getString("start");
+				String start = convertToPst(slotsArray.getJSONObject(i).getString("start"));
+
 				String startTime = start.split(",")[1];
-				String end = slotsArray.getJSONObject(i).getString("end");
+				String end = convertToPst(slotsArray.getJSONObject(i).getString("end"));
 				String endTime = end.split(",")[1];
 				String startDate = start.split(",")[0];
 				String endDate = end.split(",")[0];
@@ -262,8 +264,12 @@ public class AlertIntentService {
 				slotmap.put((i+1)+"",slotsArray.getJSONObject(i).getString("scheduleReferenceID")+"#"+slotFrag.toString());
 				slotMessage.append(slotFrag.toString());
 			}
+			if(slotsArray.length() == 1){
+				slotMessage.append(" Would you like to book this slot? Please say book this slot to confirm this appointment");
+			} else {
 
-			slotMessage.append(" you can say book slot 1 or book slot 2 or book slot 3");
+				slotMessage.append(" you can say book slot. followed by slot number. something like book slot 1");
+			}
 			if(session!=null) {
 				session.setAttribute("SLOTMAP", slotmap);
 			}
@@ -326,6 +332,24 @@ public class AlertIntentService {
 		System.out.println("AlertIntentService.main()"+service.getAppointmentSlots("2019-07-01",null));
 		
 	}
+
+
+	public static String convertToPst(String date) {
+		try {
+
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd,HH:mm:ss");
+			simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+			Date myDateInSimpleDateFormat = simpleDateFormat.parse(date);
+			simpleDateFormat.setTimeZone(TimeZone.getTimeZone("PST"));
+			return simpleDateFormat.format(myDateInSimpleDateFormat);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+
+	}
+
 	
 
 }

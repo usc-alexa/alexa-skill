@@ -58,7 +58,7 @@ public class CareplaceSpeechlet implements SpeechletV2 {
 
         String intentName = (intent != null) ? intent.getName() : null;
         AlertIntentService service = new AlertIntentService();
-        if ("MakeAppointment".equals(intentName)) {
+        if ("MakeAppointment".equals(intentName) || "RespondInitQuestion".equals(intentName)) {
             String dateRangeStart = intent.getSlot("startDate").getValue();
 
 
@@ -69,6 +69,19 @@ public class CareplaceSpeechlet implements SpeechletV2 {
 
             return getAskResponse("Confirm Selection",speechText);
         }
+
+        if("ConfirmOneSlotBooking".equals(intentName)){
+            String slotNumber = "1";
+            Map<String,String> slotvalue = (Map)requestEnvelope.getSession().getAttribute("SLOTMAP");
+            String slotText = slotvalue.get(slotNumber);
+            if(slotText==null){
+                return getAskResponse("Slot error","Please say a valid slot number. You can say slot one or slot two etcetera.");
+            }
+
+            String responseText = service.createAppointment(slotNumber,slotText,requestEnvelope.getSession());
+            return getResponse(responseText);
+        }
+
         if ("ConfirmSlot".equals(intentName)) {
            // String speechText = service.getAppointmentSlots(dateRangeStart,dateRangeEnd,requestEnvelope.getSession());
             String slotNumber = intent.getSlot("slotValue").getValue();
@@ -83,6 +96,10 @@ public class CareplaceSpeechlet implements SpeechletV2 {
 
             String responseText = service.createAppointment(slotNumber,slotText,requestEnvelope.getSession());
             return getResponse(responseText);
+        }
+        if ("AssertInitQuestion".equals(intentName)) {
+            String speechText = "Alright. Which date would you prefer? you can say something like book it on July first or August second etcetera";
+            return getAskResponse("Ask Back",speechText);
         }
         if ("CallDoctor".equals(intentName)) {
             String speechText = "if this is emergency, do you want me to call 911?";
@@ -125,7 +142,7 @@ public class CareplaceSpeechlet implements SpeechletV2 {
      * @return SpeechletResponse spoken and visual response for the given intent
      */
     private SpeechletResponse getWelcomeResponse() {
-        String speechText = "Hello. Welcome to Careplaces. Careplaces can call your doctor or notify your alerts, in few words please let me know what would you like to do?";
+        String speechText = "Hello Tim. Welcome to USC Appointment Service. Would you like to schedule an appointment with Dr. Tami Howdeshell?";
         return getAskResponse("HelloWorld", speechText);
     }
 
