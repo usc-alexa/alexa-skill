@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "usc",
+            "invocationName": "united health",
             "intents": [
                 {
                     "name": "AMAZON.FallbackIntent",
@@ -24,6 +24,18 @@
                     "samples": []
                 },
                 {
+                    "name": "ConfirmDoctor",
+                    "slots": [
+                        {
+                            "name": "physicanNo",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "physician {physicanNo}"
+                    ]
+                },
+                {
                     "name": "AssertInitQuestion",
                     "slots": [],
                     "samples": [
@@ -31,6 +43,13 @@
                         "make appointment",
                         "make appointment with Dr. Tami Howdeshell",
                         "yes please"
+                    ]
+                },
+                {
+                    "name": "NegateInitQuestion",
+                    "slots": [],
+                    "samples": [
+                        "no"
                     ]
                 },
                 {
@@ -49,7 +68,9 @@
                         }
                     ],
                     "samples": [
-                        "book it on {startDate}"
+                        "book it on {startDate}",
+                        "book on {startDate}",
+                        "{startDate}"
                     ]
                 },
                 {

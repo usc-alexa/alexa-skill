@@ -25,6 +25,7 @@ import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
 import com.amazon.speech.ui.OutputSpeech;
+import org.springframework.util.StringUtils;
 
 import java.util.Map;
 
@@ -55,17 +56,32 @@ public class CareplaceSpeechlet implements SpeechletV2 {
                 requestEnvelope.getSession().getSessionId());
 
         Intent intent = request.getIntent();
+        String speechText = "";
 
         String intentName = (intent != null) ? intent.getName() : null;
         AlertIntentService service = new AlertIntentService();
         if ("MakeAppointment".equals(intentName) || "RespondInitQuestion".equals(intentName)) {
             String dateRangeStart = intent.getSlot("startDate").getValue();
 
+            String previousIntent = (String)requestEnvelope.getSession().getAttribute("INTENT");
+
+
+
+
+            if("AssertInitQuestion".equals(previousIntent) &&  DateUtil.convertToDate(dateRangeStart) == null){
+                return getAskResponse("Confirm Selection","Sorry Tim, I could not understand the date. " + speechText);
+            }
+
+
 
             System.out.println("date passed start="+dateRangeStart);
 
 
-            String speechText = service.getAppointmentSlots(dateRangeStart,requestEnvelope.getSession());
+            speechText = service.getAppointmentSlots(dateRangeStart,requestEnvelope.getSession());
+
+            requestEnvelope.getSession().setAttribute("SLOTMESSAGE",speechText);
+
+            requestEnvelope.getSession().setAttribute("INTENT","MakeAppointment");
 
             return getAskResponse("Confirm Selection",speechText);
         }
@@ -74,58 +90,73 @@ public class CareplaceSpeechlet implements SpeechletV2 {
             String slotNumber = "1";
             Map<String,String> slotvalue = (Map)requestEnvelope.getSession().getAttribute("SLOTMAP");
             String slotText = slotvalue.get(slotNumber);
-            if(slotText==null){
-                return getAskResponse("Slot error","Please say a valid slot number. You can say slot one or slot two etcetera.");
-            }
 
-            String responseText = service.createAppointment(slotNumber,slotText,requestEnvelope.getSession());
-            return getResponse(responseText);
+
+            speechText = service.createAppointment(slotNumber,slotText,requestEnvelope.getSession());
+            requestEnvelope.getSession().setAttribute("INTENT","ConfirmOneSlotBooking");
+            return getResponse(speechText);
         }
 
         if ("ConfirmSlot".equals(intentName)) {
            // String speechText = service.getAppointmentSlots(dateRangeStart,dateRangeEnd,requestEnvelope.getSession());
             String slotNumber = intent.getSlot("slotValue").getValue();
 
+
+
             System.out.println("slot number="+slotNumber);
             System.out.println("stored slots="+requestEnvelope.getSession().getAttribute("SLOTMAP"));
             Map<String,String> slotvalue = (Map)requestEnvelope.getSession().getAttribute("SLOTMAP");
             String slotText = slotvalue.get(slotNumber);
-            if(slotText==null){
-                return getAskResponse("Slot error","Please say a valid slot number. You can say slot one or slot two etcetera.");
+
+            String previousIntent = (String)requestEnvelope.getSession().getAttribute("INTENT");
+
+
+
+            if("MakeAppointment".equals(previousIntent) && slotText==null){
+                String slotMessage = (String)requestEnvelope.getSession().getAttribute("SLOTMESSAGE");
+                return getAskResponse("Slot error","Please say a valid slot number. "+slotMessage);
             }
 
-            String responseText = service.createAppointment(slotNumber,slotText,requestEnvelope.getSession());
-            return getResponse(responseText);
+            speechText = service.createAppointment(slotNumber,slotText,requestEnvelope.getSession());
+            requestEnvelope.getSession().setAttribute("INTENT","ConfirmSlot");
+            return getResponse(speechText);
         }
-        if ("AssertInitQuestion".equals(intentName)) {
-            String speechText = "Alright. Which date would you prefer? you can say something like book it on July first or August second etcetera";
+        if ("AssertInitQuestion".equals(intentName) || "ConfirmDoctor".equals(intentName)) {
+            speechText = "Alright. Which date would you prefer? you can say something like book it on July first or August second etcetera";
+            requestEnvelope.getSession().setAttribute("INTENT","AssertInitQuestion");
             return getAskResponse("Ask Back",speechText);
         }
         if ("CallDoctor".equals(intentName)) {
-            String speechText = "if this is emergency, do you want me to call 911?";
+            speechText = "if this is emergency, do you want me to call 911?";
             return getResponse(speechText);
         } if ("AlertInvestigationIntent".equals(intentName)) {
 
-            String speechText = service.getAlerts(requestEnvelope.getSession());
+            speechText = service.getAlerts(requestEnvelope.getSession());
             return getResponse(speechText);
         } if ("CallDoctorConfirmation".equals(intentName)) {
             String slotValue = intent.getSlot("doctorName").getValue();
-            String speechText = "Calling doctor "+ slotValue;
+            speechText = "Calling doctor "+ slotValue;
             return getResponse(speechText);
         } if ("DoNotCallEmergency".equals(intentName)) {
-            String speechText = "I have following doctors on file, please let me know which doctor you want me to call. Doctor Parekh, Doctor James, Doctor Peter and Doctor Smith";
+            speechText = "I have following doctors on file, please let me know which doctor you want me to call. Doctor Parekh, Doctor James, Doctor Peter and Doctor Smith";
             return getResponse(speechText);
         } if ("GetTaskIntent".equals(intentName)) {
-            String speechText = "You do not have any task at this moment";
+            speechText = "You do not have any task at this moment";
             return getResponse(speechText);
         } if ("GoodBye".equals(intentName)) {
-            String speechText = "Take Care. Good bye";
+            speechText = "Take Care. Good bye";
+            return getResponse(speechText);
+        }if ("NegateInitQuestion".equals(intentName)) {
+            speechText = "Alright. You can always come back later. Take Care. Good bye";
             return getResponse(speechText);
         }
         else if ("AMAZON.HelpIntent".equals(intentName)) {
             return getHelpResponse();
         } else {
-            return getAskResponse("HelloWorld", "This is unsupported.  Please try something else.");
+            if(StringUtils.isEmpty(speechText)){
+                return getWelcomeResponse();
+            }
+            return getAskResponse("Something Wrong", "Sorry Tim, I did not get that. Lets try again."+ speechText);
         }
     }
 
@@ -142,7 +173,8 @@ public class CareplaceSpeechlet implements SpeechletV2 {
      * @return SpeechletResponse spoken and visual response for the given intent
      */
     private SpeechletResponse getWelcomeResponse() {
-        String speechText = "Hello Tim. Welcome to USC Appointment Service. Would you like to schedule an appointment with Dr. Tami Howdeshell?";
+        // String speechText = "Hello Tim. Welcome to USC Appointment Service. Would you like to schedule an appointment with Dr. Tami Howdeshell?";
+        String speechText = "Hello Tim. Welcome to USC Appointment Service. There are two physicians associated with you at USC. Physician 1.  Doctor Tami Howdershield. and  Physician two. Doctor Ben Sopiro. Do you want an appointment with physician one or physician two?";
         return getAskResponse("HelloWorld", speechText);
     }
 
