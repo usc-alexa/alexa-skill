@@ -35,6 +35,8 @@ import java.util.Map;
 public class CareplaceSpeechlet implements SpeechletV2 {
     private static final Logger log = LoggerFactory.getLogger(com.amazon.ask.careplaces.CareplaceSpeechlet.class);
 
+    String speechText = "";
+
     @Override
     public void onSessionStarted(SpeechletRequestEnvelope<SessionStartedRequest> requestEnvelope) {
         log.info("onSessionStarted requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
@@ -46,7 +48,9 @@ public class CareplaceSpeechlet implements SpeechletV2 {
     public SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> requestEnvelope) {
         log.info("onLaunch requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
                 requestEnvelope.getSession().getSessionId());
-        return getWelcomeResponse();
+
+        requestEnvelope.getSession().setAttribute("INTENT","LAUNCH");
+        return getWelcomeResponse(requestEnvelope);
     }
 
     @Override
@@ -56,19 +60,33 @@ public class CareplaceSpeechlet implements SpeechletV2 {
                 requestEnvelope.getSession().getSessionId());
 
         Intent intent = request.getIntent();
-        String speechText = "";
+
 
         String intentName = (intent != null) ? intent.getName() : null;
         AlertIntentService service = new AlertIntentService();
         if ("MakeAppointment".equals(intentName) || "RespondInitQuestion".equals(intentName)) {
-            String dateRangeStart = intent.getSlot("startDate").getValue();
+
 
             String previousIntent = (String)requestEnvelope.getSession().getAttribute("INTENT");
+            if(!"AssertInitQuestion".equals(previousIntent)){
+                speechText = (String)requestEnvelope.getSession().getAttribute("SPEECH");
+
+                return getAskResponse("Confirm Selection","Sorry Tim, I did not get that. Lets try again. " + speechText);
+
+            }
+
+
+            String dateRangeStart = intent.getSlot("startDate").getValue();
 
 
 
 
-            if("AssertInitQuestion".equals(previousIntent) &&  DateUtil.convertToDate(dateRangeStart) == null){
+
+            if(dateRangeStart == null){
+                return getAskResponse("Confirm Selection","Sorry Tim, I could not understand the date. " + speechText);
+            }
+
+            if( DateUtil.convertToDate(dateRangeStart) == null){
                 return getAskResponse("Confirm Selection","Sorry Tim, I could not understand the date. " + speechText);
             }
 
@@ -82,11 +100,21 @@ public class CareplaceSpeechlet implements SpeechletV2 {
             requestEnvelope.getSession().setAttribute("SLOTMESSAGE",speechText);
 
             requestEnvelope.getSession().setAttribute("INTENT","MakeAppointment");
+            requestEnvelope.getSession().setAttribute("SPEECH",speechText);
 
             return getAskResponse("Confirm Selection",speechText);
         }
 
         if("ConfirmOneSlotBooking".equals(intentName)){
+
+            String previousIntent = (String)requestEnvelope.getSession().getAttribute("INTENT");
+            if(!"MakeAppointment".equals(previousIntent)){
+                speechText = (String)requestEnvelope.getSession().getAttribute("SPEECH");
+                return getAskResponse("Confirm Selection","Sorry Tim, I did not get that. Lets try again. " + speechText);
+
+            }
+
+
             String slotNumber = "1";
             Map<String,String> slotvalue = (Map)requestEnvelope.getSession().getAttribute("SLOTMAP");
             String slotText = slotvalue.get(slotNumber);
@@ -94,11 +122,20 @@ public class CareplaceSpeechlet implements SpeechletV2 {
 
             speechText = service.createAppointment(slotNumber,slotText,requestEnvelope.getSession());
             requestEnvelope.getSession().setAttribute("INTENT","ConfirmOneSlotBooking");
+            requestEnvelope.getSession().setAttribute("SPEECH",speechText);
             return getResponse(speechText);
         }
 
         if ("ConfirmSlot".equals(intentName)) {
            // String speechText = service.getAppointmentSlots(dateRangeStart,dateRangeEnd,requestEnvelope.getSession());
+            String previousIntent = (String)requestEnvelope.getSession().getAttribute("INTENT");
+            if(!"MakeAppointment".equals(previousIntent)){
+                speechText = (String)requestEnvelope.getSession().getAttribute("SPEECH");
+                return getAskResponse("Confirm Selection","Sorry Tim, I did not get that. Lets try again. " + speechText);
+
+            }
+
+
             String slotNumber = intent.getSlot("slotValue").getValue();
 
 
@@ -106,24 +143,36 @@ public class CareplaceSpeechlet implements SpeechletV2 {
             System.out.println("slot number="+slotNumber);
             System.out.println("stored slots="+requestEnvelope.getSession().getAttribute("SLOTMAP"));
             Map<String,String> slotvalue = (Map)requestEnvelope.getSession().getAttribute("SLOTMAP");
+
+
             String slotText = slotvalue.get(slotNumber);
 
-            String previousIntent = (String)requestEnvelope.getSession().getAttribute("INTENT");
 
 
 
-            if("MakeAppointment".equals(previousIntent) && slotText==null){
-                String slotMessage = (String)requestEnvelope.getSession().getAttribute("SLOTMESSAGE");
-                return getAskResponse("Slot error","Please say a valid slot number. "+slotMessage);
-            }
+
+
 
             speechText = service.createAppointment(slotNumber,slotText,requestEnvelope.getSession());
             requestEnvelope.getSession().setAttribute("INTENT","ConfirmSlot");
-            return getResponse(speechText);
+            requestEnvelope.getSession().setAttribute("SPEECH",speechText);
+            return getAskResponse("Slot confirm", speechText);
         }
         if ("AssertInitQuestion".equals(intentName) || "ConfirmDoctor".equals(intentName)) {
+
+            String previousIntent = (String)requestEnvelope.getSession().getAttribute("INTENT");
+            if(!"LAUNCH".equals(previousIntent)){
+                speechText = (String)requestEnvelope.getSession().getAttribute("SPEECH");
+                return getAskResponse("Confirm Selection","Sorry Tim, I did not get that. Lets try again. " + speechText);
+
+            }
+
+
+
             speechText = "Alright. Which date would you prefer? you can say something like book it on July first or August second etcetera";
             requestEnvelope.getSession().setAttribute("INTENT","AssertInitQuestion");
+            requestEnvelope.getSession().setAttribute("SPEECH",speechText);
+
             return getAskResponse("Ask Back",speechText);
         }
         if ("CallDoctor".equals(intentName)) {
@@ -148,13 +197,15 @@ public class CareplaceSpeechlet implements SpeechletV2 {
             return getResponse(speechText);
         }if ("NegateInitQuestion".equals(intentName)) {
             speechText = "Alright. You can always come back later. Take Care. Good bye";
+            requestEnvelope.getSession().setAttribute("INTENT","NegateInitQuestion");
+            requestEnvelope.getSession().setAttribute("SPEECH",speechText);
             return getResponse(speechText);
         }
         else if ("AMAZON.HelpIntent".equals(intentName)) {
             return getHelpResponse();
         } else {
             if(StringUtils.isEmpty(speechText)){
-                return getWelcomeResponse();
+                return getWelcomeResponse1(requestEnvelope);
             }
             return getAskResponse("Something Wrong", "Sorry Tim, I did not get that. Lets try again."+ speechText);
         }
@@ -172,9 +223,23 @@ public class CareplaceSpeechlet implements SpeechletV2 {
      *
      * @return SpeechletResponse spoken and visual response for the given intent
      */
-    private SpeechletResponse getWelcomeResponse() {
+    private SpeechletResponse getWelcomeResponse1(SpeechletRequestEnvelope<IntentRequest> requestEnvelope) {
         // String speechText = "Hello Tim. Welcome to USC Appointment Service. Would you like to schedule an appointment with Dr. Tami Howdeshell?";
         String speechText = "Hello Tim. Welcome to USC Appointment Service. There are two physicians associated with you at USC. Physician 1.  Doctor Tami Howdershield. and  Physician two. Doctor Ben Sopiro. Do you want an appointment with physician one or physician two?";
+        requestEnvelope.getSession().setAttribute("SPEECH",speechText);
+        return getAskResponse("HelloWorld", speechText);
+    }
+
+
+    /**
+     * Creates and returns a {@code SpeechletResponse} with a welcome message.
+     *
+     * @return SpeechletResponse spoken and visual response for the given intent
+     */
+    private SpeechletResponse getWelcomeResponse(SpeechletRequestEnvelope<LaunchRequest> requestEnvelope) {
+        // String speechText = "Hello Tim. Welcome to USC Appointment Service. Would you like to schedule an appointment with Dr. Tami Howdeshell?";
+        String speechText = "Hello Tim. Welcome to USC Appointment Service. There are two physicians associated with you at USC. Physician 1.  Doctor Tami Howdershield. and  Physician two. Doctor Ben Sopiro. Do you want an appointment with physician one or physician two?";
+        requestEnvelope.getSession().setAttribute("SPEECH",speechText);
         return getAskResponse("HelloWorld", speechText);
     }
 

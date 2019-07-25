@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60b58404-1ffc-44f8-9260-966517202c73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/amazon/ask/careplaces/DateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skill.json" beforeDir="false" afterPath="$PROJECT_DIR$/skill.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/helloworld-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/helloworld-1.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,7 +22,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/skill.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="753">
@@ -56,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="116" column="97" selection-start-line="116" selection-start-column="97" selection-end-line="116" selection-end-column="97" />
+            <state relative-caret-position="201">
+              <caret line="164" column="89" selection-start-line="164" selection-start-column="89" selection-end-line="164" selection-end-column="89" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -89,8 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/services/AlertIntentService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1193">
-              <caret line="265" column="13" selection-start-line="265" selection-start-column="13" selection-end-line="265" selection-end-column="13" />
+            <state relative-caret-position="94">
+              <caret line="194" column="37" selection-start-line="194" selection-start-column="18" selection-end-line="194" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -117,6 +110,8 @@
       <find>like</find>
       <find>getWelcomeResponse</find>
       <find>RespondInitQuestion</find>
+      <find>CONFIRMDOCT</find>
+      <find>getAppointmentSlots</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -136,9 +131,9 @@
         <option value="$PROJECT_DIR$/src/com/amazon/ask/careplaces/CarePlacesStreamHandler.java" />
         <option value="$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/services/AlertIntentService.java" />
         <option value="$PROJECT_DIR$/src/com/amazon/ask/careplaces/DateUtil.java" />
-        <option value="$PROJECT_DIR$/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/skill.json" />
+        <option value="$PROJECT_DIR$/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java" />
       </list>
     </option>
   </component>
@@ -197,7 +192,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1564048910721" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1564064083411" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
@@ -321,27 +316,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/services/AlertIntentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1193">
-          <caret line="265" column="13" selection-start-line="265" selection-start-column="13" selection-end-line="265" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="116" column="97" selection-start-line="116" selection-start-column="97" selection-end-line="116" selection-end-column="97" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2007">
@@ -353,6 +327,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="753">
           <caret line="108" column="1" selection-start-line="108" selection-start-column="1" selection-end-line="108" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/handlers/services/AlertIntentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="194" column="37" selection-start-line="194" selection-start-column="18" selection-end-line="194" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/amazon/ask/careplaces/CareplaceSpeechlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="164" column="89" selection-start-line="164" selection-start-column="89" selection-end-line="164" selection-end-column="89" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
