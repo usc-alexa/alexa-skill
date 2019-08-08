@@ -43,7 +43,7 @@ public class AlertIntentService {
 		}
 
 		String url = "https://dev1.careplaces.us/ubercare-system/api/login";
-		String requestJson = "{\"username\":\"tim.lambert.cp@gmail.com\",\"password\":\"C.p@2017#\"}";
+		String requestJson = "{\"username\":\"tim.lambert.cp@gmail.com\",\"password\":\"CarePlaces21#\"}";
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -172,19 +172,24 @@ public class AlertIntentService {
 
 		} catch (RestClientException e) {
 			// TODO Auto-generated catch block
+
 			e.printStackTrace();
+			return "Sorry Tim, I was not able to book the appointment for technical reason. We are investigating the problem.  Please try later.";
 		} catch (KeyManagementException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "Sorry Tim, I was not able to book the appointment for technical reason. We are investigating the problem.  Please try later.";
 		} catch (KeyStoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "Sorry Tim, I was not able to book the appointment for technical reason. We are investigating the problem.  Please try later.";
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "Sorry Tim, I was not able to book the appointment for technical reason. We are investigating the problem.  Please try later.";
 		}
 
-		return "Your appoint with Dr. Tami Howdeshell is booked successfully for "+slotText;
+		return "Your appointment with Dr. Tami Howdeshell is booked successfully for "+slotText + ". Thank you for using our service.";
 	}
 
 
@@ -277,15 +282,20 @@ public class AlertIntentService {
 		} catch (RestClientException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "Sorry Tim, we are having a technical difficulty. We are investigating the problem.  Please try again later.";
+
 		} catch (KeyManagementException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "Sorry Tim, we are having a technical difficulty. We are investigating the problem.  Please try again later.";
 		} catch (KeyStoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "Sorry Tim, we are having a technical difficulty. We are investigating the problem.  Please try again later.";
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "Sorry Tim, we are having a technical difficulty. We are investigating the problem.  Please try again later.";
 		}
 
 		return slotMessage.toString();
