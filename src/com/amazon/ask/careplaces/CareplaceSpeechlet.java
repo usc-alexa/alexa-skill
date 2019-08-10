@@ -9,7 +9,9 @@
  */
 package com.amazon.ask.careplaces;
 
-import com.amazon.ask.careplaces.handlers.services.AlertIntentService;
+import com.amazon.ask.careplaces.handlers.services.Service;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +29,7 @@ import com.amazon.speech.ui.SimpleCard;
 import com.amazon.speech.ui.OutputSpeech;
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -63,7 +66,7 @@ public class CareplaceSpeechlet implements SpeechletV2 {
 
 
         String intentName = (intent != null) ? intent.getName() : null;
-        AlertIntentService service = new AlertIntentService();
+        Service service = new Service();
         if ("MakeAppointment".equals(intentName) || "RespondInitQuestion".equals(intentName)) {
 
 
@@ -94,8 +97,12 @@ public class CareplaceSpeechlet implements SpeechletV2 {
 
             System.out.println("date passed start="+dateRangeStart);
 
+            try {
 
-            speechText = service.getAppointmentSlots(dateRangeStart,requestEnvelope.getSession());
+                speechText = service.getAppointmentSlots(dateRangeStart, requestEnvelope.getSession());
+            }catch(Exception ee){
+                speechText = "Sorry Tim, the appointment service is unable to process your request at this time. We are investigating the problem.  Please try again later.";
+            }
 
             requestEnvelope.getSession().setAttribute("SLOTMESSAGE",speechText);
 
@@ -188,7 +195,7 @@ public class CareplaceSpeechlet implements SpeechletV2 {
             return getResponse(speechText);
         } if ("AlertInvestigationIntent".equals(intentName)) {
 
-            speechText = service.getAlerts(requestEnvelope.getSession());
+           // speechText = service.getAlerts(requestEnvelope.getSession());
             return getResponse(speechText);
         } if ("CallDoctorConfirmation".equals(intentName)) {
             String slotValue = intent.getSlot("doctorName").getValue();
@@ -219,6 +226,8 @@ public class CareplaceSpeechlet implements SpeechletV2 {
             return getAskResponse("Something Wrong", "Sorry Tim, I did not get that. Lets try again."+ speechText);
         }
     }
+
+
 
     @Override
     public void onSessionEnded(SpeechletRequestEnvelope<SessionEndedRequest> requestEnvelope) {
