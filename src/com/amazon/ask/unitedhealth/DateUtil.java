@@ -1,4 +1,4 @@
-package com.amazon.ask.careplaces;
+package com.amazon.ask.unitedhealth;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

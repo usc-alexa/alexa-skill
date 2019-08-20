@@ -1,4 +1,4 @@
-package com.amazon.ask.careplaces;
+package com.amazon.ask.unitedhealth;
 
 import com.amazon.speech.speechlet.Session;
 import org.json.JSONArray;
@@ -47,9 +47,9 @@ public class ServiceResponseProcessor {
             String endTime = end.split("T")[1];
             String startDate = start.split("T")[0];
             String endDate = end.split("T")[0];
-            slotFrag.append(" Slot "+(i+1)+": on " + startDate + " from "+ startTime);
-            slotFrag.append(" to "+endTime +".");
-            slotmap.put((i+1)+"",slotsArray.getJSONObject(i).getJSONObject("resource").getJSONObject("schedule").getString("reference")+"#"+slotFrag.toString());
+            slotFrag.append(" Slot "+(i+1)+": on " + startDate + " from "+ startTime.split("\\.")[0].substring(0,5));
+            slotFrag.append(" to "+endTime.split("\\.")[0].substring(0,5) +".");
+            slotmap.put((i+1)+"",slotsArray.getJSONObject(i).getJSONObject("resource").getString("id")+"#"+slotFrag.toString());
             slotMessage.append(slotFrag.toString());
         }
         if(slotsArray.length() == 1){

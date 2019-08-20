@@ -1,6 +1,4 @@
-package com.amazon.ask.careplaces;
-
-import org.springframework.http.MediaType;
+package com.amazon.ask.unitedhealth;
 
 import java.util.HashMap;
 import java.util.Map;

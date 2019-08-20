@@ -1,13 +1,12 @@
-package com.amazon.ask.careplaces.handlers.services;
+package com.amazon.ask.unitedhealth.handlers.services;
 
-import com.amazon.ask.careplaces.Parameters;
-import com.amazon.ask.careplaces.ServiceResponseProcessor;
+import com.amazon.ask.unitedhealth.Parameters;
+import com.amazon.ask.unitedhealth.ServiceResponseProcessor;
 import com.amazon.speech.speechlet.Session;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.TrustStrategy;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +23,6 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Service {
@@ -101,26 +99,37 @@ public class Service {
 
 
 
-			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			headers.setBearerAuth(getAccessToken(session));
 
-			MultiValueMap<String, String> slotRequestMap= new LinkedMultiValueMap<String, String>();
-			slotRequestMap.add("access_token", getAccessToken(session));
-			slotRequestMap.add("orgID","2");
+
 
 			String slotRefId = slotText.split("#")[0];
-			slotRequestMap.add("slotID",slotRefId);
 
 			slotText = slotText.split("#")[1];
 
 
 
-			String slotUrl = "https://dev1.careplaces.us/ubercare-system/api/v1/patientemr/bookPhysicianAppointment";
+			String createAppointmentUrl = "https://api-gateway.linkhealth.com/alexa-scheduler/1/appointments/4342008/"+slotRefId;
+
+			String slotRequest = "{\"practitionerId\":\"605926\"}";
 
 
-			HttpEntity<MultiValueMap<String, String>> slotEntity = new HttpEntity<MultiValueMap<String, String>>(slotRequestMap, headers);
+			HttpEntity<String> appointmentEntity = new HttpEntity<String>(slotRequest, headers);
+			System.out.println(createAppointmentUrl);
 
 
-			String response = getRestTemplate().postForObject(slotUrl, slotEntity, String.class);
+			String appointmentResponse = getRestTemplate().postForObject(createAppointmentUrl, appointmentEntity, String.class);
+
+			JSONObject appointmentResponseJson = new JSONObject(appointmentResponse);
+			System.out.println("appointment response = "+appointmentResponseJson.toString());
+
+			if("accepted".equals(appointmentResponseJson.getString("participantStatus"))) {
+
+				return "Your appointment is booked successfully for " + slotText + ". Thank you for using our service.";
+			} else {
+				return "error";
+			}
 
 		} catch (RestClientException e) {
 			// TODO Auto-generated catch block
@@ -141,7 +150,7 @@ public class Service {
 			return "Sorry Tim, I was not able to book the appointment for technical reason. We are investigating the problem.  Please try later.";
 		}
 
-		return "Your appointment with Dr. Tami Howdeshell is booked successfully for "+slotText + ". Thank you for using our service.";
+
 	}
 
 

@@ -7,11 +7,9 @@
 
  or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-package com.amazon.ask.careplaces;
+package com.amazon.ask.unitedhealth;
 
-import com.amazon.ask.careplaces.handlers.services.Service;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.amazon.ask.unitedhealth.handlers.services.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,14 +27,13 @@ import com.amazon.speech.ui.SimpleCard;
 import com.amazon.speech.ui.OutputSpeech;
 import org.springframework.util.StringUtils;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  * This sample shows how to create a simple speechlet for handling speechlet requests.
  */
-public class CareplaceSpeechlet implements SpeechletV2 {
-    private static final Logger log = LoggerFactory.getLogger(com.amazon.ask.careplaces.CareplaceSpeechlet.class);
+public class UnitedHealthSpeechlet implements SpeechletV2 {
+    private static final Logger log = LoggerFactory.getLogger(UnitedHealthSpeechlet.class);
 
     String speechText = "";
 
@@ -143,8 +140,10 @@ public class CareplaceSpeechlet implements SpeechletV2 {
         if ("ConfirmSlot".equals(intentName)) {
            // String speechText = service.getAppointmentSlots(dateRangeStart,dateRangeEnd,requestEnvelope.getSession());
             String previousIntent = (String)requestEnvelope.getSession().getAttribute("INTENT");
+            String prevSpeech = "";
             if(!"MakeAppointment".equals(previousIntent)){
                 speechText = (String)requestEnvelope.getSession().getAttribute("SPEECH");
+                prevSpeech = speechText;
                 return getAskResponse("Confirm Selection","Sorry Tim, I did not get that. Lets try again. " + speechText);
 
             }
@@ -171,6 +170,13 @@ public class CareplaceSpeechlet implements SpeechletV2 {
             speechText = service.createAppointment(slotNumber,slotText,requestEnvelope.getSession());
             requestEnvelope.getSession().setAttribute("INTENT","ConfirmSlot");
             requestEnvelope.getSession().setAttribute("SPEECH",speechText);
+
+            if(speechText.equals("error")){
+                speechText = "The requested slot is not available. Please try another slot." + prevSpeech;
+                requestEnvelope.getSession().setAttribute("INTENT","MakeAppointment");
+                return getAskResponse("Slot",speechText);
+            }
+
             return getResponse(speechText);
         }
         if ("AssertInitQuestion".equals(intentName) || "ConfirmDoctor".equals(intentName)) {
@@ -256,7 +262,7 @@ public class CareplaceSpeechlet implements SpeechletV2 {
      */
     private SpeechletResponse getWelcomeResponse(SpeechletRequestEnvelope<LaunchRequest> requestEnvelope) {
         // String speechText = "Hello Tim. Welcome to USC Appointment Service. Would you like to schedule an appointment with Dr. Tami Howdeshell?";
-        String speechText = "Hello Tim. Welcome to Careplaces Appointment Service. There are two physicians associated with you at USC. Physician 1.  Doctor Tami Howdeshell. and  Physician two. Doctor Ben Shapiro. Do you want an appointment with physician one or physician two?";
+        String speechText = "Hello Tim. Welcome to United Health Care Appointment Service. There are two physicians associated with. Physician 1.  Doctor Tami Howdeshell. and  Physician two. Doctor Ben Shapiro. Do you want an appointment with physician one or physician two?";
         requestEnvelope.getSession().setAttribute("SPEECH",speechText);
         return getAskResponse("United Health", speechText);
     }
@@ -269,7 +275,10 @@ public class CareplaceSpeechlet implements SpeechletV2 {
     private SpeechletResponse getResponse(String speechText) {
 
 
-        return getResponse(speechText);
+        PlainTextOutputSpeech speech = getPlainTextOutputSpeech(speechText);
+        
+
+        return SpeechletResponse.newTellResponse(speech);
 
     }
 

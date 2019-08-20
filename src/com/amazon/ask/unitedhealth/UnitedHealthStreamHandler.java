@@ -7,7 +7,7 @@
 
  or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
-package com.amazon.ask.careplaces;
+package com.amazon.ask.unitedhealth;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +21,7 @@ import com.amazon.speech.speechlet.lambda.SpeechletRequestStreamHandler;
  * this project using the {@code lambda-compile} Ant task and upload the resulting zip file to power
  * your function.
  */
-public final class CarePlacesStreamHandler extends SpeechletRequestStreamHandler {
+public final class UnitedHealthStreamHandler extends SpeechletRequestStreamHandler {
     private static final Set<String> supportedApplicationIds;
     static {
         /*
@@ -32,7 +32,7 @@ public final class CarePlacesStreamHandler extends SpeechletRequestStreamHandler
         // supportedApplicationIds.add("[unique-value-here]");
     }
 
-    public CarePlacesStreamHandler() {
-        super(new CareplaceSpeechlet(), supportedApplicationIds);
+    public UnitedHealthStreamHandler() {
+        super(new UnitedHealthSpeechlet(), supportedApplicationIds);
     }
 }
