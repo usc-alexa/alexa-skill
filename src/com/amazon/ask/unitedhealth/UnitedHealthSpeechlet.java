@@ -276,7 +276,7 @@ public class UnitedHealthSpeechlet implements SpeechletV2 {
 
 
         PlainTextOutputSpeech speech = getPlainTextOutputSpeech(speechText);
-        
+
 
         return SpeechletResponse.newTellResponse(speech);
 

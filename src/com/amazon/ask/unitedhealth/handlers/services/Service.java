@@ -35,6 +35,14 @@ public class Service {
 	
 	public Service(){}
 
+	/**
+	 *
+	 * @param session
+	 * @return
+	 *
+	 * Call the OAuth service to get the token.
+	 * TODO create an API GateWay proxy and provide credential their instead of hardcoding in the code
+	 */
 	public String getAccessToken(Session session){
 
 
@@ -86,23 +94,13 @@ public class Service {
 
 	public String createAppointment(String slot,String slotText,Session session){
 
-		RestTemplate restTemplate = new RestTemplate();
-
-
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		Map<String,String> answer = new HashMap<String,String>();
-		StringBuffer alertMessage = new StringBuffer();
-		JSONObject alertobj =null;
 
 		try {
 
-
-
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			headers.setBearerAuth(getAccessToken(session));
-
-
 
 			String slotRefId = slotText.split("#")[0];
 
@@ -110,7 +108,7 @@ public class Service {
 
 
 
-			String createAppointmentUrl = "https://api-gateway.linkhealth.com/alexa-scheduler/1/appointments/4342008/"+slotRefId;
+			String createAppointmentUrl = Parameters.MAKE_APPOINTMENT_CONTEXT+ "/4342008/"+slotRefId; // todo make call to pull patient id
 
 			String slotRequest = "{\"practitionerId\":\"605926\"}";
 
@@ -170,7 +168,7 @@ public class Service {
 
 
 
-
+			// todo externalize practitionerId, this should be a service based on zip code provided by the patient
 
 			String slotRequest = "{\"practitionerId\":\"605926\"}";
 

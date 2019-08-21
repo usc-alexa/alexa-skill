@@ -10,6 +10,7 @@ public class Parameters {
     public static String BASE = "https://api-gateway.linkhealth.com";
     public static String OAUTH_TOKEN = BASE + "/oauth/token";
     public static String AVAILABLE_SLOTS_CONTEXT = BASE + "/alexa-scheduler/1/availableSlots";
+    public static String MAKE_APPOINTMENT_CONTEXT = BASE + "alexa-scheduler/1/appointments";
 
 
     static Map<String,String> headerMap;
